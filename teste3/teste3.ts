@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
 
+  ///criando as variaveis
   dadosJson: { dia: number, valor: number }[] = [];
   public menorValor = 0;
   public menorValorSemFeriadosEFinaisDeSemana = 0;
@@ -21,6 +22,7 @@ export class AppComponent {
   public diasComValorMaiorQueAMedia: number[] = [];
   public TotalDeDiasComValorMaiorQueAMedia = 0;
 
+///lendo o arquivo .json
   constructor(private http: HttpClient) {
     this.http.get('assets/json/dados01.json').subscribe((res) => {
       this.dadosJson = res as [{ dia: number, valor: number }];
@@ -28,7 +30,7 @@ export class AppComponent {
       this.apresentarDados();
     });
   }
-
+///Tirando as medias necessarias 
   public apresentarDados() {
     let apenasValores = this.dadosJson.map(dado => dado.valor);
 
@@ -62,7 +64,7 @@ export class AppComponent {
     });
 
     this.TotalDeDiasComValorMaiorQueAMedia = this.diasComValorMaiorQueAMedia.length;
-
+///Mostrando para o usuario no HTML
     console.log('Dias com valor maior que a media', this.diasComValorMaiorQueAMedia);
     console.log('Total de dias com valor maior que a media', this.TotalDeDiasComValorMaiorQueAMedia);
   }
